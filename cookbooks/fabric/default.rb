@@ -8,8 +8,7 @@ end
 
 execute 'install fabric' do
   command <<-EOL
-    curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
-    python get-pip.py
+    easy_install pip
     pip install fabric
   EOL
   user 'root'
