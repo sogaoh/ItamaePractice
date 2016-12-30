@@ -1,6 +1,6 @@
 %w{
   gcc
-  zlib-devel
+  openssl-devel
   python-devel
   python-setuptools
 }.each do |pkg|
