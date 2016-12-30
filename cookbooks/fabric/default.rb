@@ -1,5 +1,6 @@
 %w{
   gcc
+  zlib-devel
   python-devel
   python-setuptools
 }.each do |pkg|
