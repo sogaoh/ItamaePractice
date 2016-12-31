@@ -4,7 +4,7 @@
   package pkg
 end
 
-execute "download repo" do
+execute "download jenkins repo" do
   command "wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo"
   user 'root'
   not_if "test -e /etc/yum.repos.d/jenkins.repo"
@@ -15,8 +15,9 @@ execute "import jenkins key" do
   user 'root'
 end
 
-package "jenkins" do
-  action :install
+execute "install jenkins" do
+  command "yum install --enablerepo=jenkins jenkins"
+  user 'root'
 end
 
 execute 'firewall setting' do
