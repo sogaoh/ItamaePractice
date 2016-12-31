@@ -15,9 +15,8 @@ execute "import jenkins key" do
   user 'root'
 end
 
-execute "install jenkins" do
-  command "yum install --enablerepo=jenkins jenkins"
-  user 'root'
+package "jenkins" do
+  action :install
 end
 
 execute 'firewall setting' do
