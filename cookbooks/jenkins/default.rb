@@ -28,6 +28,10 @@ execute 'firewall setting' do
   user 'root'
 end
 
-service "jenkins" do
-  action [:enable, :start]
-end
+#service "jenkins" do
+#  action [:start]
+#end
+
+#ToDo : 自動起動設定、/etc/sudoers に↓を設定
+##Defaults:jenkins !requiretty
+##jenkins ALL=(ALL)       NOPASSWD: ALL
