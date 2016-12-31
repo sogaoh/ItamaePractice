@@ -4,11 +4,24 @@
   package pkg
 end
 
-execute 'install jenkins' do
+execute "download repo" do
+  command "wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo"
+  not_if "test -e /etc/yum.repos.d/jenkins.repo"
+end
+
+execute "import jenkins key" do
+  command "rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key"
+end
+
+package "jenkins" do
+  action :install
+end
+
+execute 'firewall setting' do
   command <<-EOL
-    wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-$ stable/jenkins.repo
-    rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
-    yum install jenkins
+    firewall-cmd --add-port=8080/tcp --permanent
+    firewall-cmd --add-service=http --permanent
+    firewall-cmd --reload
   EOL
   user 'root'
 end
